@@ -1,0 +1,628 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2020-5-3-An-Error-Alerting-System-of-One&#x27;s-Own</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8d27c677-5673-4110-a3e5-3431379e918f" class="page sans"><header><h1 class="page-title">2020-5-3-An-Error-Alerting-System-of-One&#x27;s-Own</h1></header><div class="page-body"><figure id="e2fee6b6-4eac-435f-a4be-06f2621ccd3b" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/error.jpg"><img style="width:2592px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/error.jpg"/></a></figure><h1 id="75426a0c-b1ab-4266-bda0-e49393bb0ecf" class="">An Error Alerting System of One&#x27;s Own</h1><hr id="7f6fd86f-4c27-4dde-8d59-74d3bc08f7e2"/><p id="c4d6de99-4632-4f75-9919-11809fc249e1" class=""><em>This blog post was originally published on the BulkWhiz tech, business, and operations blog, Whizardry, </em><a href="https://medium.com/whizardry/an-error-alerting-system-of-ones-own-d3850781ca18?source=---------2------------------"><em>here</em></a><em>.</em></p><p id="ccf46be4-5d21-4cbc-a638-17bdde044493" class="">
+</p><blockquote id="178ba877-6c47-4be0-9361-b0a426063743" class="">&quot;Software engineering is strewn with the wreckage of those who have relied beyond reason solely on the error alerting configurations of others.&quot;
+
+— Virginia Woolf, paraphrased</blockquote><p id="baa9e30b-d159-4312-afe0-4499e2e1a770" class="">
+</p><p id="945a1d12-9c9e-4a3e-8ed4-90f32455e56d" class="">Picture this. It&#x27;s 5PM on a Saturday. By some twist of fate you do not yet completely understand, you&#x27;ve ended up both on call and committed to a family dinner at this ungodly hour of the Sabbath. You think it&#x27;ll be fine; you&#x27;ll just keep your laptop handy and periodically check your phone for error alerts until you safely ride out your on-call time slot. Right?</p><p id="dac3e28a-583a-49d8-b03f-8823fbd6d997" class="">Fast forward to 6:07PM. You&#x27;re sprawled on the floor of your grandma&#x27;s bedroom, both laptop and phone open to your Slack alert channels and a shell on a production machine running, all on mobile data. Some production issue has vital services down and alerts that all look the same rolling in every millisecond. Your product manager is going crazy, and you yourself can barely breathe, let alone figure out what&#x27;s wrong and fix it. You start ruing the day you went into software engineering and wondering if pyramid schemes really are the scam they very obviously are.</p><h1 id="59383c9f-80e2-41ae-b11f-c222dfc9eb87" class="">Alerts, alerts, alerts</h1><p id="ed058c66-5cb3-479e-ae98-3764d885a82f" class="">Before you call your friend who pitched you the latest Ponzi, know it doesn&#x27;t have to be that way. As hyperbolic as the above hypothetical situation is, it captures the essence of a very real software engineering problem: <a href="https://victorops.com/blog/avoiding-on-call-alert-fatigue-and-the-corresponding-effects?utm_source=Sponsorship&amp;utm_medium=Newsletter&amp;utm_content=MonitoringAlerting_Listicle&amp;utm_vendor=DevOpsWeekly">on-call fatigue</a>. Yes, it&#x27;s great that you have an error monitoring system in place and that you&#x27;ve linked it to your workplace messaging app, but constantly seeing alerts that all look the same coming in at a huge frequency is just overwhelming. As time goes on, stress and burnout build up within the engineering team, production environment deviance becomes normalized, and issues are either unresolved or resolved very inefficiently.</p><p id="2316713d-b619-413a-82a7-62078e0927f4" class="">Because of this, we decided to personalize our error alerting system. We narrowed down the problem into three major sub-problems:</p><ol id="44b39f62-5e92-4290-9d8c-850309e621fc" class="numbered-list" start="1"><li>alerts weren&#x27;t being routed to the concerned team members,</li></ol><ol id="c5406e2e-7711-470f-b27e-8230e1612a92" class="numbered-list" start="2"><li>there was no way to differentiate between them at a glance, and</li></ol><ol id="07104a98-440e-4470-9dc8-af8975c5c07d" class="numbered-list" start="3"><li>they had too little helpful information.</li></ol><p id="d2808643-4656-4a04-b866-a9cd55cb0435" class="">We use <a href="https://github.com/errbit/errbit">Errbit</a>, an open-source Airbrake-API-compliant error catcher that, like our own BulkWhiz API, is written in Ruby-on-Rails. Errbit supports a number of notification services (and, as per the essence of this post, you can always extend it to support even more), but we use Slack so that&#x27;s what I&#x27;ll focus on here.</p><p id="7da4bd78-e27d-4554-b438-df5ed4b3424b" class="">To get started, we <a href="https://help.github.com/articles/fork-a-repo/">forked the Errbit repo on GitHub</a>, <a href="https://www.techrepublic.com/article/how-to-create-a-docker-image-and-push-it-to-docker-hub/">created a Docker image and pushed it to DockerHub</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment">initialized a test Errbit Kubernetes deployment pointing to that image and routed staging alerts to it</a>, and we were good to go!</p><h1 id="7eb14b29-261d-4edf-90f5-02d7def4da0a" class=""><a href="https://www.urbandictionary.com/define.php?term=don%E2%80%99t%20%40%20me">Don&#x27;t @ me</a> — but actually @ me</h1><p id="ed05f93b-3269-4cd1-8258-c51deeff7eb3" class="">What if you didn&#x27;t have to worry about every single alert ever but only the ones you were mentioned in? No more keeping tabs on the alerts channel for a good half hour after pushing production changes or analyzing a backtrace to figure out which fellow team member to tag. Our first thought was: Create a routing system within Errbit that gets <code>git blame</code> information from <a href="https://developer.github.com/v4/">GitHub&#x27;s GraphQL API</a>. Map the returned JSON to the in-app files and line numbers in the error&#x27;s backtrace and you have the GitHub usernames of the code authors. Map <em>those</em> to their corresponding Slack user IDs which you can get from the Slack API, either by getting them from <a href="https://api.slack.com/methods">Slack&#x27;s API method testing interface</a> and passing them in an environmental variable to your Errbit deployment or, cleaner and more robust to changes, calling Slack&#x27;s API from inside your Errbit code.</p><figure id="56c251e8-f645-4633-81c2-9da6cddcb0f2" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2215-33-16.png"><img style="width:873px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2215-33-16.png"/></a></figure><p id="0e1ed435-63c5-4f95-8cfb-2954719cec0d" class=""><em>One of our first alerts with code author mentions. In the code, this is</em> <a href="https://api.slack.com/docs/message-formatting#linking_to_channels_and_users"><em>how the mentions work</em></a><em>:</em> <code>&quot;&lt;@#{slack_user_id}&gt;&quot;</code><em>.</em></p><p id="d85d0d0f-cbaf-4c3f-9e4b-dc05d2e668c8" class="">Now that&#x27;s all good and well, but &quot;whodunnit&quot; isn&#x27;t necessarily &quot;whogottadealwithit.&quot; As such, we implemented a force-assignment system, mapping certain error classes to the Slack user IDs of the responsible team members and checking that hash first before sending the <code>git blame</code> request. We thus had to create some custom error classes from our BulkWhiz API codebase to be able to raise those force-assigned errors where needed. Force assignment also proved useful in situations where the code author was no longer part of the team, or where the error at hand was a broader issue that more than one team member needed to deal with. In those cases, we decided to tag Slack user groups instead of individual users. (Pro tip: Slack user <strong>group</strong> mentions work a bit differently:</p><p id="088e2baf-9c47-4d44-9b14-a160707b71a9" class=""><code>&quot;&lt;!subteam^#{slack_user_id}|#{slack_user_name}&gt;&quot;</code>.)</p><h1 id="172a1780-a212-4439-a9cc-22673b7195e0" class="">Triage and error</h1><p id="52e3d6ac-552d-4a1f-9a57-4eeddb340fac" class="">To make processing alerts even faster, we needed to begin differentiating between their levels of severity at a glance. Some alerts are actually uncaught exceptions, whereas others are notifications we manually raise from the BulkWhiz API codebase to trigger certain actions, both automated and human. Using color coding and emojis, we&#x27;re now able to visually differentiate between those two alert types at first sight.</p><figure id="16c018f2-05cb-49e1-ac38-ddb429b966cd" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2216-45-38.png"><img style="width:869px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2216-45-38.png"/></a></figure><figure id="61fab7dc-c1a3-438c-8c21-4df6aad51fd7" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2216-20-25.png"><img style="width:878px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2216-20-25.png"/></a></figure><p id="19968841-aa66-4662-ac96-8d0a1d7a88d9" class=""><em>Exception versus notification. For notifications that do not have force assignments, we refrain from falling back on mentioning code authors to avoid unnecessary noise. (On a side note, notice how &quot;Whodunnit&quot; became &quot;Assigned To&quot;?)</em></p><p id="df438d88-4ac4-4793-8a56-0e4b46c45a68" class="">You&#x27;ll notice by looking at the &quot;Environment&quot; key that all these are production errors. In the beginning, I mentioned that we had set up a sandbox environment using staging errors. That&#x27;s another way in which we triage errors: Configuring our app to send production and staging alerts each to a separate Errbit deployment, both of which pull the same image (or different branches of that image if we which to test code changes first) but send alerts to separate Slack channels. To further filter out the most severe and urgent of errors, we then <a href="https://stackstorm.com/">use an automation engine called StackStorm</a> to send those alerts to a third Slack channel. That way, we can tell which alerts require immediate attention and which can wait.</p><h1 id="2bdb32d3-f07f-46d0-9406-a87685261c1c" class="">Knowledge is power*</h1><p id="da82689b-5342-4417-8fcb-29df6c0e1bbd" class="">But only when you have the right parts of it — and the affected user is one of those. The Airbrake API already includes that information in the <code>context</code> key of the <code>Notice</code> object it creates on catching an error. This is unfortunately lost when you manually send a bare error to Airbrake/Errbit, so make sure you wrap your error in a <code>Notice</code> object first.</p><figure id="8b39502b-24a6-4840-9f06-33fc5ab397a9" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2217-05-26.png"><img style="width:885px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2217-05-26.png"/></a></figure><figure id="7a338b4b-40ab-467e-b14c-0fe25cb886ac" class="image"><a href="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2217-08-55.png"><img style="width:926px" src="2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2217-08-55.png"/></a></figure><p id="d4463614-55b7-47e2-ae74-316f9d77d62d" class=""><em>Cronjobs are users too!</em></p><p id="0f1d8a17-5889-4073-b7eb-7e6462956433" class="">Sending the hostname, a detail already captured by Airbrake/Errbit, to Slack is also a good way to be able to quickly tell where the problem is, especially in a Kubernetes cluster where one <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">pod</a> or <a href="https://kubernetes.io/docs/concepts/architecture/nodes/">node</a> could be down or where you could be routing certain requests to certain pods.</p><h1 id="1971b081-b07f-4689-9820-5ccb3920bd42" class="">Smarter, better, stronger</h1><p id="c9f16a39-b1f4-4a24-b549-de9a4b5d362b" class="">We set out to customize our error alerting system with three goals:</p><ol id="7eb0f5ec-dd32-4639-a25a-10a4b129305e" class="numbered-list" start="1"><li>to reduce noise,</li></ol><ol id="60883030-d51b-408f-8bab-b9af15e0f8fc" class="numbered-list" start="2"><li>to streamline triage, and</li></ol><ol id="653bdd10-98e9-4a67-9542-253078ab2974" class="numbered-list" start="3"><li>to enhance the information sent.</li></ol><p id="4fa3c772-097a-453f-9ad2-24e3085acaea" class="">While the above configurations have helped us make tremendous strides towards reaching these goals, they can also be improved upon in future iterations.</p><p id="b0151e05-d042-438d-953f-bc4669f973b1" class="">Having a smarter routing model that mentions the author of the latest change in the backtrace, rather than <em>all</em> authors in the backtrace, would further reduce noise, as would having alerts fire once per error and instead periodically notify that the error is still occurring rather than flooding the Slack channel with alerts. In addition, adding a UI component to the alert where team members could rate the severity of the alert and then filtering based on that would improve triage by crowd-sourcing judgment calls about errors&#x27; urgency.</p><p id="3407d8b2-9de9-4da8-be2b-3c39aba2ff93" class="">Regarding the way we have deployed the system, there&#x27;s an argument to be made that using Errbit to send notifications is a violation of <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> and that that is a job better suited for a customized bot built on something like Hubot, for example (which, interestingly, Errbit supports as a notification service).** Maintaining an Errbit deployment per environment would also result in unnecessary overhead if we wanted to monitor more than two environments, prompting us to question whether there is a better way to separate alerts from different environments.</p><p id="4f5afd70-5a82-4151-8858-2be2f33b39d4" class="">Nothing is the same in practice as it is in theory. As users interact with your app, problems will occur, and you will need to be notified of them. The key is finding the means of notification that best suits your app, team, and workplace routines — and that doesn&#x27;t leave your engineers crying on their grandmothers&#x27; bedroom floors.</p><p id="99cd98a6-b379-4317-9ea5-78b7cfdc4c64" class="">
+</p><p id="ba8660aa-e54a-476e-bcdd-03cf51c78c72" class=""><em>The GitHub repo for this customized Errbit is publicly available</em> <a href="https://github.com/laasem/errbit"><em>here</em></a> <em>and the Docker image</em> <a href="https://cloud.docker.com/u/laasem/repository/docker/laasem/errbit"><em>here</em></a><em>. A pull request to the upstream Errbit repo is in the works.</em></p><p id="9f8201cc-ac76-40dd-b845-2ee2ec3750dc" class="">
+</p><p id="f244b270-ab73-46e7-8ade-5f52c6efabe4" class=""><strong>Notes:</strong></p><p id="2a35909c-55bf-4bbe-8fc4-e90f4747415c" class=""><em>* The features in this section were implemented by Saher El-Neklawy, who is also the brains behind the other feature ideas and the deployment scheme.</em></p><p id="4dc07403-89c8-4efe-8526-0161500f44e0" class=""><em>** Special thanks to Ihab Khattab for raising this point.</em></p></div></article></body></html>
