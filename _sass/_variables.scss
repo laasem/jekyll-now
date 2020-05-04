@@ -1,10 +1,9 @@
-
 //
 // VARIABLES
 //
 
 // Colors
-$blue: #4183C4;
+$blue: #4183c4;
 
 // Grays
 $black: #000;
@@ -15,9 +14,25 @@ $lightGray: #eee;
 $white: #fff;
 
 // Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
-$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
+@font-face {
+  font-family: 'jostregular';
+  src: url('../fonts/jost-variablefont_italwght-webfont.woff2') format('woff2'),
+    url('../fonts/jost-variablefont_italwght-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'merriweatherregular';
+  src: url('../fonts/merriweather-regular-webfont.woff2') format('woff2'),
+    url('../fonts/merriweather-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$helvetica: jostregular, Arial, sans-serif;
+$helveticaNeue: 'jostregular', Helvetica, Arial, sans-serif;
+$georgia: 'merriweatherregular', serif;
 
 // Mobile breakpoints
 @mixin mobile {

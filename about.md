@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+I write code and other types of poetry and prose. From Ruby and Bash scripts to on-call process design documents, I'm interested in whatever helps me build software with people to help people.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+Want to chat, collaborate, or hire me? Feel free to reach out on:
+
+[lara.aasem@aucegypt.edu](mailto:lara.aasem@aucegypt.edu)
