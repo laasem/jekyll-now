@@ -83,3 +83,10 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+excerpt_separator: '<!-- more -->'
+
+reading_time:
+  second_plural: 'sec read' # default: seconds
+  minute_singular: 'min read' # default: minute
+  minute_plural: 'min read' # default: minutes

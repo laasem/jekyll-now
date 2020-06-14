@@ -13,6 +13,8 @@ _This blog post was originally published on January 23, 2019 on the BulkWhiz tec
 
 Picture this. It's 5PM on a Saturday. By some twist of fate you do not yet completely understand, you've ended up both on call and committed to a family dinner at this ungodly hour of the Sabbath. You think it'll be fine; you'll just keep your laptop handy and periodically check your phone for error alerts until you safely ride out your on-call time slot. Right?
 
+<!-- more -->
+
 Fast forward to 6:07PM. You're sprawled on the floor of your grandma's bedroom, both laptop and phone open to your Slack alert channels and a shell on a production machine running, all on mobile data. Some production issue has vital services down and alerts that all look the same rolling in every millisecond. Your product manager is going crazy, and you yourself can barely breathe, let alone figure out what's wrong and fix it. You start ruing the day you went into software engineering and wondering if pyramid schemes really are the scam they very obviously are.
 
 # Alerts, alerts, alerts
