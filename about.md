@@ -8,6 +8,6 @@ I write code and other types of poetry and prose. From Ruby and Bash scripts to 
 
 ### Contact me
 
-Want to chat, collaborate, or hire me? Feel free to reach out on:
+Have any questions, comments, and/or corrections? Feel free to reach out on:
 
 [lara.aasem@aucegypt.edu](mailto:lara.aasem@aucegypt.edu)
