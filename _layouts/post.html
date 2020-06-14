@@ -7,8 +7,7 @@ layout: default
   <div class="date">
     {{ page.date | date: "%B %e, %Y" }}
   </div>
-  &#46;
-  <div class="reading-time">{{ content | reading_time }}</div>
+  &#46; {% include read-time.html content=content %}
 
   <div class="entry">
     {{ content }}

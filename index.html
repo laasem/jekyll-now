@@ -11,8 +11,7 @@ layout: default
     <div class="date">
       {{ post.date | date: "%B %e, %Y" }}
     </div>
-    &#46;
-    <div class="reading-time">{{ post.content | reading_time }}</div>
+    &#46; {% include read-time.html content=post.content %}
 
     <div class="entry">
       {{ post.excerpt }}
