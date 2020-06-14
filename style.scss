@@ -228,6 +228,7 @@ img {
   line-height: 0;
 
   @include mobile {
+    font-size: 12px;
     margin: 3px 0;
   }
 }
