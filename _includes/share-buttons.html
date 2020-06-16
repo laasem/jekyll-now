@@ -74,7 +74,9 @@ include.pageurl %} {% else %} {% assign pageurl = page.url %} {% endif %}
     <a
         class="twitter"
         title="Share this on Twitter"
-        href="http://twitter.com/home?status={{ site.url }}{{ pageurl }}"
+        href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        data-url="https://laasem.github.io/An-Error-Alerting-System-of-One%27s-Own/"
+        data-show-count="false"
         target="_blank"
     >
         <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +101,6 @@ include.pageurl %} {% else %} {% assign pageurl = page.url %} {% endif %}
         class="mail"
         title="Share this through Email"
         href="mailto:?&body={{ site.url }}{{ pageurl }}"
-        target="_blank"
     >
         <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
             <path
