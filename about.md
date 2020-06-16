@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I write code and other types of poetry and prose. From Ruby and Bash scripts to on-call process design documents, I'm interested in whatever helps me build software with people to help people.
+I write code and write about it. From Ruby and Bash scripts to on-call process design documents, I'm interested in whatever helps me build software with people to help people.
 
 ### Contact me
 
