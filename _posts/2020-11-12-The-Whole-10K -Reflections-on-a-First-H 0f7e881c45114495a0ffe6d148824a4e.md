@@ -36,3 +36,5 @@ A hackathon, like a marathon, is an intense experience. The chance to throw your
 But hackathons can also be *too* stimulating, maybe to the point of being stressful. The collective aspect of the experience may help you avoid getting sucked into the wormhole of a looming fast-approaching deadline where food, sleep, and sanity are forgone. It's also important to actively remind yourself that your "all" is your all after staying healthy, resting, and having a good time; it doesn't mean draining yourself.
 
 After all, the best part of the experience? It was really fun.
+
+_Thanks to Karim Kamaleldin for his comments on the first draft of this post._
