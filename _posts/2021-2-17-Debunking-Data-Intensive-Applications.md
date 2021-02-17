@@ -12,7 +12,7 @@ There is something fascinating about solving a seemingly impossible problem. Thi
 <!-- more -->
 
 ![2020%205%203%20An%20Error%20Alerting%20System%20of%20One%20s%20Own/Screenshotfrom2019-01-2216-45-38.png](../images/2021-2-17-Debunking-Data-Intensive-Applications/ddia-poster.jpg)
-_A map of the sea of distributed data, where each island represents a chapter in the book. Source: <a href="https://github.com/ept/ddia-references" target="_blank">Martin Kleppman's GitHub repo of DDIA literature references</a>._
+_A map of the sea of distributed data, where each island represents a chapter in the book. Source: <a href="https://github.com/ept/ddia-references" target="_blank">Martin Kleppmann's GitHub repo of DDIA literature references</a>._
 
 
 # Concurrent doesn't mean simultaneous
